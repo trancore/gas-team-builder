@@ -14,4 +14,9 @@ export default defineConfig({
       "~/": path.join(__dirname, "./src/"),
     },
   },
+  css: {
+    modules: {
+      localsConvention: "dashes",
+    },
+  },
 });
