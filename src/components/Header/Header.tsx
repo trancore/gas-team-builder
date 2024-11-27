@@ -1,5 +1,6 @@
 ﻿import styles from "~/components/Header/Header.module.scss";
 import TextForm from "~/components/Form/TextForm.tsx";
+import Button from "~/components/Button/Button";
 
 export default function Header() {
   return (
@@ -8,14 +9,10 @@ export default function Header() {
         <p className={styles.appTitle}>Team Builder</p>
         <div className={styles.inputBox}>
           <TextForm />
-          <button>
-            <p>読み込む</p>
-          </button>
+          <Button text="読み込み" />
         </div>
       </div>
-      <button>
-        <p>出力する</p>
-      </button>
+      <Button text="出力する" />
     </header>
   );
 }
