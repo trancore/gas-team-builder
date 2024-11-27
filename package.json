@@ -1,11 +1,12 @@
 {
-  "name": "kanban-group",
+  "name": "gas-team-builder",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build"
+    "build": "tsc -b && vite build",
+    "push": "clasp push"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -13,6 +14,7 @@
   },
   "devDependencies": {
     "@types/google-apps-script": "^1.0.85",
+    "@types/node": "^22.10.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
