@@ -8,11 +8,6 @@
       "path": "./tsconfig.node.json"
     }
   ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"]
-    }
-  },
+  "compilerOptions": {},
   "include": ["vite-env.d.ts"]
 }
