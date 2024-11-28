@@ -1,0 +1,17 @@
+﻿.main {
+  margin: 24px;
+
+  > .tag-box {
+    margin: 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  > .group-box {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    overflow-x: scroll;
+  }
+}
