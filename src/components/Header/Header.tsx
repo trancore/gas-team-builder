@@ -1,5 +1,5 @@
 ﻿import styles from "~/components/Header/Header.module.scss";
-import TextForm from "~/components/Form/TextForm.tsx";
+import TextForm from "~/components/Form/TextForm";
 import Button from "~/components/Button/Button";
 
 export default function Header() {
