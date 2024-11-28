@@ -18,5 +18,10 @@ export default defineConfig({
     modules: {
       localsConvention: "dashes",
     },
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+      },
+    },
   },
 });
