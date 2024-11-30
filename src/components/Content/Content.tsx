@@ -2,22 +2,45 @@
 import Tag from "~/components/Tag/Tag";
 import Group from "~/components/Group/Group";
 import AdditionalGroup from "~/components/Group/AdditionalGroup";
+import { useState } from "react";
 
 export default function Content() {
+  const [mainTags] = useState([
+    { id: "1", name: "メインタグ１" },
+    { id: "2", name: "メインタグ２" },
+    { id: "3", name: "メインタグ３" },
+    { id: "4", name: "メインタグ４" },
+    { id: "5", name: "メインタグ５" },
+  ]);
+  const [subTags] = useState([
+    { id: "6", name: "サブタグ６" },
+    { id: "7", name: "サブタグ７" },
+    { id: "8", name: "サブタグ８" },
+    { id: "9", name: "サブタグ９" },
+    { id: "10", name: "サブタグ１０" },
+  ]);
+  // const { tag, offsetDifference, isDragging } = useDragLayer((monitor) => ({
+  //   tag: monitor.getItem() as DragObjectTag,
+  //   offsetDifference: monitor.getDifferenceFromInitialOffset(),
+  //   isDragging: monitor.isDragging(),
+  // }));
+
+  // if (!isDragging || !offsetDifference || !tag) {
+  //   return null;
+  // }
+
   return (
     <main className={styles.main}>
       <div className={styles.tagBox}>
         <div className={styles.tagMainBox}>
-          <Tag text="メインタグ１" />
-          <Tag text="メインタグ２" />
-          <Tag text="メインタグ３" />
+          {mainTags.map((mainTag) => {
+            return <Tag key={mainTag.id} id={mainTag.id} text={mainTag.name} />;
+          })}
         </div>
         <div className={styles.tagSubBox}>
-          <Tag text="サブタグ１" />
-          <Tag text="サブタグ２" />
-          <Tag text="サブタグ３" />
-          <Tag text="サブタグ４" />
-          <Tag text="サブタグ５" />
+          {subTags.map((subTag) => {
+            return <Tag key={subTag.id} id={subTag.id} text={subTag.name} />;
+          })}
         </div>
       </div>
       <div className={styles.groupBox}>
