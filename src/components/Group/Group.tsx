@@ -1,4 +1,5 @@
 ﻿import styles from "~/components/Group/Group.module.scss";
+import HideButton from "~/components/Button/HideButton";
 
 export default function Group() {
   return (
@@ -9,7 +10,11 @@ export default function Group() {
             <td>サブタグ１</td>
           </tr>
           <tr>
-            <td className={styles.add}>+ 追加</td>
+            <td className={styles.add}>
+              <HideButton>
+                <p>+ 追加</p>
+              </HideButton>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -28,7 +33,22 @@ export default function Group() {
             <td>サブタグ４</td>
           </tr>
           <tr>
-            <td className={styles.add}>+ 追加</td>
+            <td className={styles.add}>
+              <HideButton>
+                <p>+ 追加</p>
+              </HideButton>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table className={styles.groupMember}>
+        <tbody>
+          <tr>
+            <td className={styles.add}>
+              <HideButton>
+                <p>- 削除</p>
+              </HideButton>
+            </td>
           </tr>
         </tbody>
       </table>
