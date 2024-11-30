@@ -6,6 +6,18 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+
+    > .tag-main-box {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+    }
+
+    > .tag-sub-box {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+    }
   }
 
   > .group-box {
