@@ -1,6 +1,8 @@
 ﻿export type DragObjectTag = {
-  tag: {
-    id: string;
-    name: string;
+  position?: {
+    top?: number;
+    left?: number;
   };
+  id?: string;
+  name?: string;
 };
