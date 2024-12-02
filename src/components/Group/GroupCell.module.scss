@@ -2,4 +2,13 @@
   border: 1.5px solid #0000ee;
   padding: 20px 0;
   height: 70px;
+
+  > .tag-box {
+    display: flex;
+    justify-content: center;
+
+    > .tag {
+      height: 45.89px;
+    }
+  }
 }

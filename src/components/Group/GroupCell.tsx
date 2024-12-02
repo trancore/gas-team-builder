@@ -4,6 +4,7 @@ import styles from "~/components/Group/GroupCell.module.scss";
 import { DragObjectTag } from "~/types/dragAndDrop";
 import { Dispatch, SetStateAction } from "react";
 import { Group } from "~/types/group";
+import Tag from "~/components/Tag/Tag";
 
 type Props = {
   text: string;
@@ -25,8 +26,9 @@ export function GroupCell({
     void,
     Record<string, boolean>
   >(() => ({
-    accept: [ITEM_TYPES.TAG],
+    accept: ITEM_TYPES.TAG,
     drop: (_droppedTag, monitor) => {
+      console.log("🚀 ~ _droppedTag:", _droppedTag);
       const position = monitor.getSourceClientOffset();
       console.log("🚀 ~ GroupCell ~ position:", position);
       setGroups &&
@@ -64,7 +66,9 @@ export function GroupCell({
       className={styles.cell}
       style={{ backgroundColor: isOver ? "#0000ee40" : "" }}
     >
-      {text}
+      <div className={styles.tagBox}>
+        {text ? <Tag id={""} text={text} /> : <div className={styles.tag} />}
+      </div>
     </td>
   );
 }

@@ -13,16 +13,19 @@ export default function Tag({ id, text }: Props) {
     DragObjectTag,
     Record<string, never>,
     { isDragging: boolean }
-  >(() => ({
-    type: ITEM_TYPES.TAG,
-    tag: {
-      id,
-      name: text,
-    },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+  >(
+    () => ({
+      type: ITEM_TYPES.TAG,
+      tag: {
+        id,
+        name: text,
+      },
+      collect: (monitor) => ({
+        isDragging: !!monitor.isDragging(),
+      }),
     }),
-  }));
+    [id, text],
+  );
 
   // useEffect(() => {
   //   preview(getEmptyImage());
