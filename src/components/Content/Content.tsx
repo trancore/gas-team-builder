@@ -2,20 +2,19 @@
 import Tag from "~/components/Tag/Tag";
 import Group from "~/components/Group/Group";
 import AdditionalGroup from "~/components/Group/AdditionalGroup";
-import { ComponentProps, useState } from "react";
-import { DragObjectTag } from "~/types/DragAndDrop";
-
-type GroupType = ComponentProps<typeof Group>["group"];
+import { useState } from "react";
+import { DragObjectTag } from "~/types/dragAndDrop";
+import { Group as GroupType } from "~/types/group";
 
 export default function Content() {
-  const [mainTags, setMainTag] = useState<DragObjectTag[]>([
+  const [mainTags] = useState<DragObjectTag[]>([
     { id: "1", name: "メインタグ１" },
     { id: "2", name: "メインタグ２" },
     { id: "3", name: "メインタグ３" },
     { id: "4", name: "メインタグ４" },
     { id: "5", name: "メインタグ５" },
   ]);
-  const [subTags, setSubTag] = useState<DragObjectTag[]>([
+  const [subTags] = useState<DragObjectTag[]>([
     { id: "6", name: "サブタグ６" },
     { id: "7", name: "サブタグ７" },
     { id: "8", name: "サブタグ８" },
@@ -70,8 +69,6 @@ export default function Content() {
               key={index}
               componentId={index}
               group={group}
-              setMainTag={setMainTag}
-              setSubTag={setSubTag}
               setGroups={setGroups}
             />
           );
