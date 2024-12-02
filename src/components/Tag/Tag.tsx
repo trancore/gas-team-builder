@@ -1,7 +1,7 @@
 ﻿import { useDrag } from "react-dnd";
 import styles from "~/components/Tag/Tag.module.scss";
 import { ITEM_TYPES } from "~/constants/dragAndDrop";
-import { DragObjectTag } from "~/types/DragAndDrop";
+import { DragObjectTag } from "~/types/dragAndDrop";
 
 type Props = {
   id: string;

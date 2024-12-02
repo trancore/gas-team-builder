@@ -2,29 +2,15 @@
 import HideButton from "~/components/Button/HideButton";
 import { GroupCell } from "~/components/Group/GroupCell";
 import { Dispatch, SetStateAction } from "react";
-import { DragObjectTag } from "~/types/DragAndDrop";
-
-type SetTag = Dispatch<SetStateAction<DragObjectTag[]>>;
-type Group = {
-  main: DragObjectTag;
-  sub: DragObjectTag[];
-};
+import { Group as GroupType } from "~/types/group";
 
 type Props = {
   componentId: number;
-  group: Group;
-  setMainTag: SetTag;
-  setSubTag: SetTag;
-  setGroups: Dispatch<SetStateAction<Group[]>>;
+  group: GroupType;
+  setGroups: Dispatch<SetStateAction<GroupType[]>>;
 };
 
-export default function Group({
-  componentId,
-  group,
-  setMainTag,
-  setSubTag,
-  setGroups,
-}: Props) {
+export default function Group({ componentId, group, setGroups }: Props) {
   function addSub() {
     group.sub.push({});
     const newGroup = group;
@@ -37,7 +23,7 @@ export default function Group({
       }),
     );
   }
-  function removeTeams() {
+  function removeGruops() {
     setGroups((prev) => [...prev.filter((_, index) => index !== componentId)]);
   }
 
@@ -46,7 +32,12 @@ export default function Group({
       <table className={styles.groupTop}>
         <tbody>
           <tr>
-            <GroupCell text={group.main?.name || ""} setTag={setMainTag} />
+            <GroupCell
+              text={group.main?.name || ""}
+              groupNumber={componentId}
+              isMain
+              setGroups={setGroups}
+            />
           </tr>
         </tbody>
       </table>
@@ -55,7 +46,12 @@ export default function Group({
           {group.sub?.map((tag, index) => {
             return (
               <tr key={index}>
-                <GroupCell text={tag.name || ""} setTag={setSubTag} />
+                <GroupCell
+                  text={tag.name || ""}
+                  groupNumber={componentId}
+                  cellNumber={index}
+                  setGroups={setGroups}
+                />
               </tr>
             );
           })}
@@ -72,7 +68,7 @@ export default function Group({
         <tbody>
           <tr>
             <td className={styles.add}>
-              <HideButton onClick={removeTeams}>
+              <HideButton onClick={removeGruops}>
                 <p>- 削除</p>
               </HideButton>
             </td>

@@ -1,17 +1,21 @@
 ﻿import styles from "~/components/Group/AdditionalGroup.module.scss";
 import HideButton from "~/components/Button/HideButton";
-import { ComponentProps, Dispatch, SetStateAction } from "react";
-import Group from "~/components/Group/Group";
-
-type GroupType = ComponentProps<typeof Group>["group"];
+import { Dispatch, SetStateAction } from "react";
+import { Group } from "~/types/group";
 
 type Props = {
-  setGroups: Dispatch<SetStateAction<GroupType[]>>;
+  setGroups: Dispatch<SetStateAction<Group[]>>;
 };
 
 export default function AdditionalGroup({ setGroups }: Props) {
   function onClick() {
-    setGroups((prev) => [...prev, {}]);
+    setGroups((prev) => [
+      ...prev,
+      {
+        main: {},
+        sub: [{}],
+      },
+    ]);
   }
 
   return (
