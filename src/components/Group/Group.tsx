@@ -3,14 +3,23 @@ import HideButton from "~/components/Button/HideButton";
 import { GroupCell } from "~/components/Group/GroupCell";
 import { Dispatch, SetStateAction } from "react";
 import { Group as GroupType } from "~/types/group";
+import { DragObjectTag } from "~/types/dragAndDrop";
 
 type Props = {
   componentId: number;
   group: GroupType;
+  setMainTags: Dispatch<SetStateAction<DragObjectTag[]>>;
+  setSubTags: Dispatch<SetStateAction<DragObjectTag[]>>;
   setGroups: Dispatch<SetStateAction<GroupType[]>>;
 };
 
-export default function Group({ componentId, group, setGroups }: Props) {
+export default function Group({
+  componentId,
+  group,
+  setMainTags,
+  setSubTags,
+  setGroups,
+}: Props) {
   function addSub() {
     group.sub.push({});
     const newGroup = group;
@@ -36,6 +45,8 @@ export default function Group({ componentId, group, setGroups }: Props) {
               text={group.main?.name || ""}
               groupNumber={componentId}
               isMain
+              setMainTags={setMainTags}
+              setSubTags={setSubTags}
               setGroups={setGroups}
             />
           </tr>
@@ -50,6 +61,8 @@ export default function Group({ componentId, group, setGroups }: Props) {
                   text={tag.name || ""}
                   groupNumber={componentId}
                   cellNumber={index}
+                  setMainTags={setMainTags}
+                  setSubTags={setSubTags}
                   setGroups={setGroups}
                 />
               </tr>

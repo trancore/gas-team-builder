@@ -11,6 +11,8 @@ type Props = {
   groupNumber: number;
   cellNumber?: number;
   isMain?: boolean;
+  setMainTags?: Dispatch<SetStateAction<DragObjectTag[]>>;
+  setSubTags?: Dispatch<SetStateAction<DragObjectTag[]>>;
   setGroups?: Dispatch<SetStateAction<Group[]>>;
 };
 
@@ -19,6 +21,8 @@ export function GroupCell({
   groupNumber,
   cellNumber = 0,
   isMain,
+  setMainTags,
+  setSubTags,
   setGroups,
 }: Props) {
   const [{ isOver }, drop] = useDrop<
@@ -46,6 +50,16 @@ export function GroupCell({
             ...structuredClone(removedGroups).splice(groupNumber),
           ];
         });
+
+      isMain
+        ? setMainTags &&
+          setMainTags((prev) => {
+            return prev.filter((tag) => droppedTag.id !== tag.id);
+          })
+        : setSubTags &&
+          setSubTags((prev) => {
+            return prev.filter((tag) => droppedTag.id !== tag.id);
+          });
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),

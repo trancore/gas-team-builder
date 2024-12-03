@@ -5,16 +5,18 @@ import AdditionalGroup from "~/components/Group/AdditionalGroup";
 import { useState } from "react";
 import { DragObjectTag } from "~/types/dragAndDrop";
 import { Group as GroupType } from "~/types/group";
+import { useDrop } from "react-dnd/dist/hooks/useDrop/useDrop";
+import { ITEM_TYPES } from "~/constants/dragAndDrop";
 
 export default function Content() {
-  const [mainTags] = useState<DragObjectTag[]>([
+  const [mainTags, setMainTags] = useState<DragObjectTag[]>([
     { id: "1", name: "メインタグ１" },
     { id: "2", name: "メインタグ２" },
     { id: "3", name: "メインタグ３" },
     { id: "4", name: "メインタグ４" },
     { id: "5", name: "メインタグ５" },
   ]);
-  const [subTags] = useState<DragObjectTag[]>([
+  const [subTags, setSubTags] = useState<DragObjectTag[]>([
     { id: "6", name: "サブタグ６" },
     { id: "7", name: "サブタグ７" },
     { id: "8", name: "サブタグ８" },
@@ -35,6 +37,14 @@ export default function Content() {
   // if (!isDragging || !offsetDifference || !tag) {
   //   return null;
   // }
+
+  const [drop] = useDrop<DragObjectTag, void, Record<string, boolean>>(() => ({
+    accept: ITEM_TYPES.TAG,
+    drop: (droppedTag) => {},
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
 
   return (
     <main className={styles.main}>
@@ -69,6 +79,8 @@ export default function Content() {
               key={index}
               componentId={index}
               group={group}
+              setMainTags={setMainTags}
+              setSubTags={setSubTags}
               setGroups={setGroups}
             />
           );

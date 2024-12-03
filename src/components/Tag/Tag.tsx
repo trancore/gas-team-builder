@@ -27,10 +27,6 @@ export default function Tag({ id, text }: Props) {
     [id, text],
   );
 
-  // useEffect(() => {
-  //   preview(getEmptyImage());
-  // }, [preview]);
-
   return (
     <div
       className={styles.tag}
