@@ -16,7 +16,7 @@ export default function Tag({ id, text }: Props) {
   >(
     () => ({
       type: ITEM_TYPES.TAG,
-      tag: {
+      item: {
         id,
         name: text,
       },
