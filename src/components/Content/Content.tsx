@@ -10,45 +10,62 @@ import { ITEM_TYPES } from "~/constants/dragAndDrop";
 
 export default function Content() {
   const [mainTags, setMainTags] = useState<DragObjectTag[]>([
-    { id: "1", name: "メインタグ１" },
-    { id: "2", name: "メインタグ２" },
-    { id: "3", name: "メインタグ３" },
-    { id: "4", name: "メインタグ４" },
-    { id: "5", name: "メインタグ５" },
+    { id: "1", name: "メインタグ１", isMainTag: true },
+    { id: "2", name: "メインタグ２", isMainTag: true },
+    { id: "3", name: "メインタグ３", isMainTag: true },
+    { id: "4", name: "メインタグ４", isMainTag: true },
+    { id: "5", name: "メインタグ５", isMainTag: true },
   ]);
   const [subTags, setSubTags] = useState<DragObjectTag[]>([
-    { id: "6", name: "サブタグ６" },
-    { id: "7", name: "サブタグ７" },
-    { id: "8", name: "サブタグ８" },
-    { id: "9", name: "サブタグ９" },
-    { id: "10", name: "サブタグ１０" },
+    { id: "6", name: "サブタグ６", isMainTag: false },
+    { id: "7", name: "サブタグ７", isMainTag: false },
+    { id: "8", name: "サブタグ８", isMainTag: false },
+    { id: "9", name: "サブタグ９", isMainTag: false },
+    { id: "10", name: "サブタグ１０", isMainTag: false },
   ]);
   const [groups, setGroups] = useState<GroupType[]>([
     { main: {}, sub: [{}] },
     { main: {}, sub: [{}] },
     { main: {}, sub: [{}] },
   ]);
-  // const { tag, offsetDifference, isDragging } = useDragLayer((monitor) => ({
-  //   tag: monitor.getItem() as DragObjectTag,
-  //   offsetDifference: monitor.getDifferenceFromInitialOffset(),
-  //   isDragging: monitor.isDragging(),
-  // }));
 
-  // if (!isDragging || !offsetDifference || !tag) {
-  //   return null;
-  // }
-
-  const [drop] = useDrop<DragObjectTag, void, Record<string, boolean>>(() => ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, drop] = useDrop<DragObjectTag>(() => ({
     accept: ITEM_TYPES.TAG,
-    drop: (droppedTag) => {},
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
+    drop: (droppedTag) => {
+      droppedTag.isMainTag
+        ? setMainTags((prev) => {
+            return [...prev, droppedTag];
+          })
+        : setSubTags((prev) => {
+            return [...prev, droppedTag];
+          });
+
+      setGroups((prev) => {
+        return droppedTag.isMainTag
+          ? prev.map((group, index) => {
+              if (droppedTag.id === group.main.id) {
+                return { main: {}, sub: prev[index].sub };
+              }
+              return prev[index];
+            })
+          : prev.map((group) => {
+              const subTags = group.sub.filter(
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                (_tag, index) => droppedTag.id !== String(index),
+              );
+              return {
+                main: group.main,
+                sub: subTags.length > 0 ? subTags : [{}],
+              };
+            });
+      });
+    },
   }));
 
   return (
     <main className={styles.main}>
-      <div className={styles.tagBox}>
+      <div className={styles.tagBox} ref={drop}>
         <div className={styles.tagMainBox}>
           {mainTags.map((mainTag) => {
             return (
@@ -56,6 +73,7 @@ export default function Content() {
                 key={`main-tag${mainTag.id}`}
                 id={mainTag.id || ""}
                 text={mainTag.name || ""}
+                isMainTag
               />
             );
           })}

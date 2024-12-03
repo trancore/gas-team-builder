@@ -9,7 +9,7 @@ import Tag from "~/components/Tag/Tag";
 type Props = {
   text: string;
   groupNumber: number;
-  cellNumber?: number;
+  cellNumber?: string;
   isMain?: boolean;
   setMainTags?: Dispatch<SetStateAction<DragObjectTag[]>>;
   setSubTags?: Dispatch<SetStateAction<DragObjectTag[]>>;
@@ -19,8 +19,8 @@ type Props = {
 export function GroupCell({
   text,
   groupNumber,
-  cellNumber = 0,
-  isMain,
+  cellNumber,
+  isMain = false,
   setMainTags,
   setSubTags,
   setGroups,
@@ -32,13 +32,15 @@ export function GroupCell({
   >(() => ({
     accept: ITEM_TYPES.TAG,
     drop: (droppedTag) => {
+      if (droppedTag.isMainTag !== isMain) return;
+
       setGroups &&
         setGroups((prev) => {
           const droppedGroup = structuredClone(prev[groupNumber]);
 
           isMain
             ? (droppedGroup.main = droppedTag)
-            : (droppedGroup.sub[cellNumber] = droppedTag);
+            : (droppedGroup.sub[Number(cellNumber)] = droppedTag);
 
           const removedGroups = prev.filter(
             (_group, index) => groupNumber !== index,
@@ -61,9 +63,12 @@ export function GroupCell({
             return prev.filter((tag) => droppedTag.id !== tag.id);
           });
     },
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
+    collect: (monitor) => {
+      const droppedTag = monitor.getItem();
+      return {
+        isOver: !!monitor.isOver() && droppedTag.isMainTag === isMain,
+      };
+    },
   }));
 
   return (
@@ -73,7 +78,11 @@ export function GroupCell({
       style={{ backgroundColor: isOver ? "#0000ee40" : "" }}
     >
       <div className={styles.tagBox}>
-        {text ? <Tag id={""} text={text} /> : <div className={styles.tag} />}
+        {text ? (
+          <Tag id={cellNumber || "0"} text={text} isMainTag={isMain} />
+        ) : (
+          <div className={styles.tag} />
+        )}
       </div>
     </td>
   );
