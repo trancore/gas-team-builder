@@ -27,22 +27,14 @@ export function GroupCell({
     Record<string, boolean>
   >(() => ({
     accept: ITEM_TYPES.TAG,
-    drop: (_droppedTag, monitor) => {
-      console.log("🚀 ~ _droppedTag:", _droppedTag);
-      const position = monitor.getSourceClientOffset();
-      console.log("🚀 ~ GroupCell ~ position:", position);
+    drop: (droppedTag) => {
       setGroups &&
         setGroups((prev) => {
           const droppedGroup = structuredClone(prev[groupNumber]);
 
-          // TODO デバッグ用 削除すること
-          const test = { name: "test" };
-          // isMain
-          //   ? (droppedGroup.main = droppedTag)
-          //   : (droppedGroup.sub[cellNumber] = droppedTag);
           isMain
-            ? (droppedGroup.main = test)
-            : (droppedGroup.sub[cellNumber] = test);
+            ? (droppedGroup.main = droppedTag)
+            : (droppedGroup.sub[cellNumber] = droppedTag);
 
           const removedGroups = prev.filter(
             (_group, index) => groupNumber !== index,
