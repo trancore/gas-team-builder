@@ -33,6 +33,12 @@ export default function Group({
     );
   }
   function removeGruops() {
+    setMainTags((prev) => {
+      return [...prev, group.main];
+    });
+    setSubTags((prev) => {
+      return [...prev, ...group.sub];
+    });
     setGroups((prev) => [...prev.filter((_, index) => index !== componentId)]);
   }
 
