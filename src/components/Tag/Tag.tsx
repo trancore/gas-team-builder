@@ -7,9 +7,13 @@ type Props = {
   id: string;
   text: string;
   isMainTag?: boolean;
+  info?: {
+    header: string;
+    value: string;
+  }[];
 };
 
-export default function Tag({ id, text, isMainTag = false }: Props) {
+export default function Tag({ id, text, isMainTag = false, info }: Props) {
   const [{ isDragging }, drag] = useDrag<
     DragObjectTag,
     Record<string, never>,
@@ -21,6 +25,7 @@ export default function Tag({ id, text, isMainTag = false }: Props) {
         id,
         name: text,
         isMainTag,
+        info: info,
       },
       collect: (monitor) => ({
         isDragging: !!monitor.isDragging(),
@@ -30,12 +35,19 @@ export default function Tag({ id, text, isMainTag = false }: Props) {
   );
 
   return (
-    <div
-      className={styles.tag}
-      ref={drag}
-      style={{ opacity: isDragging ? "0.2" : "1" }}
-    >
-      {text}
+    <div className={styles.tagBox}>
+      <div
+        className={styles.tag}
+        ref={drag}
+        style={{ opacity: isDragging ? "0.2" : "1" }}
+      >
+        {text}
+      </div>
+      <div className={styles.hoverTagBox}>
+        {info?.map((info, index) => (
+          <p key={index}>{`${info.header}: ${info.value}`}</p>
+        ))}
+      </div>
     </div>
   );
 }

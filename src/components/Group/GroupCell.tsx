@@ -11,6 +11,10 @@ type Props = {
   groupNumber: number;
   cellNumber?: string;
   isMain?: boolean;
+  info?: {
+    header: string;
+    value: string;
+  }[];
   setMainTags?: Dispatch<SetStateAction<DragObjectTag[]>>;
   setSubTags?: Dispatch<SetStateAction<DragObjectTag[]>>;
   setGroups?: Dispatch<SetStateAction<Group[]>>;
@@ -21,6 +25,7 @@ export function GroupCell({
   groupNumber,
   cellNumber,
   isMain = false,
+  info,
   setMainTags,
   setSubTags,
   setGroups,
@@ -90,7 +95,12 @@ export function GroupCell({
     >
       <div className={styles.tagBox}>
         {text ? (
-          <Tag id={cellNumber || "0"} text={text} isMainTag={isMain} />
+          <Tag
+            id={cellNumber || "0"}
+            text={text}
+            isMainTag={isMain}
+            info={info}
+          />
         ) : (
           <div className={styles.tag} />
         )}

@@ -10,15 +10,15 @@
     > .tag-main-box {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       gap: 8px;
-      overflow-x: scroll;
     }
 
     > .tag-sub-box {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       gap: 8px;
-      overflow-x: scroll;
     }
   }
 

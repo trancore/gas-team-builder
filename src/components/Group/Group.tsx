@@ -52,6 +52,7 @@ export default function Group({
               groupNumber={componentId}
               cellNumber={group.main.id}
               isMain
+              info={group.main.info}
               setMainTags={setMainTags}
               setSubTags={setSubTags}
               setGroups={setGroups}
@@ -68,6 +69,7 @@ export default function Group({
                   text={tag.name || ""}
                   groupNumber={componentId}
                   cellNumber={String(index)}
+                  info={tag.info}
                   setMainTags={setMainTags}
                   setSubTags={setSubTags}
                   setGroups={setGroups}

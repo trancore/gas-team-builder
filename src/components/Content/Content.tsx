@@ -74,6 +74,7 @@ export default function Content({
                 id={mainTag.id || ""}
                 text={mainTag.name || ""}
                 isMainTag
+                info={mainTag.info}
               />
             );
           })}
@@ -85,6 +86,7 @@ export default function Content({
                 key={`sub-tag${subTag.id}`}
                 id={subTag.id || ""}
                 text={subTag.name || ""}
+                info={subTag.info}
               />
             );
           })}

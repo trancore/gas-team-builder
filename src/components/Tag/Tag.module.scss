@@ -1,11 +1,36 @@
-﻿.tag {
-  display: inline-block;
-  margin: 0 0.1em 0.6em 0;
-  padding: 0.6em;
-  line-height: 1;
+﻿.tag-box {
+  position: relative;
+  line-height: 1.5;
   text-decoration: none;
-  color: #0000ee;
   background-color: #fff;
-  border: 1px solid #0000ee;
-  cursor: pointer;
+  overflow: visible;
+
+  > .tag {
+    display: inline-block;
+    margin: 0 0.1em 0.6em 0;
+    padding: 0.6em;
+    color: #0000ee;
+    border: 1px solid #0000ee;
+    cursor: pointer;
+  }
+
+  > .hoverTagBox {
+    display: none;
+    position: absolute;
+    top: -10px;
+    left: 100%;
+    margin-left: 10px; /* ポインタとの間にスペースを追加 */
+    z-index: 10000;
+    background-color: #ffffff;
+    margin: 0 0.1em 0.6em 0;
+    padding: 0.6em;
+    color: #000000;
+    border: 1px solid #000000;
+  }
+
+  > .tag:hover + .hoverTagBox {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+  }
 }
