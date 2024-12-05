@@ -2,7 +2,7 @@
 import Tag from "~/components/Tag/Tag";
 import Group from "~/components/Group/Group";
 import AdditionalGroup from "~/components/Group/AdditionalGroup";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { DragObjectTag } from "~/types/dragAndDrop";
 import { Group as GroupType } from "~/types/group";
 import { useDrop } from "react-dnd/dist/hooks/useDrop/useDrop";
@@ -11,18 +11,20 @@ import { ITEM_TYPES } from "~/constants/dragAndDrop";
 type Props = {
   mainTags: DragObjectTag[];
   subTags: DragObjectTag[];
+  groups: GroupType[];
   setMainTags: Dispatch<SetStateAction<DragObjectTag[]>>;
   setSubTags: Dispatch<SetStateAction<DragObjectTag[]>>;
+  setGroups: Dispatch<SetStateAction<GroupType[]>>;
 };
 
 export default function Content({
   mainTags,
   subTags,
+  groups,
   setMainTags,
   setSubTags,
+  setGroups,
 }: Props) {
-  const [groups, setGroups] = useState<GroupType[]>([{ main: {}, sub: [{}] }]);
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, drop] = useDrop<DragObjectTag>(() => ({
     accept: ITEM_TYPES.TAG,

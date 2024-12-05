@@ -6,12 +6,16 @@ import { Dispatch } from "react";
 type Props = {
   inputText: string;
   read: () => void;
+  output: () => void;
   setInputText: Dispatch<React.SetStateAction<string>>;
 };
 
-export default function Header({ inputText, read, setInputText }: Props) {
-  function output() {}
-
+export default function Header({
+  inputText,
+  read,
+  output,
+  setInputText,
+}: Props) {
   return (
     <header className={styles.header}>
       <div className={styles.appTitleInput}>
