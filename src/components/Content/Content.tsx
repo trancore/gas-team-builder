@@ -27,13 +27,19 @@ export default function Content({
   const [_, drop] = useDrop<DragObjectTag>(() => ({
     accept: ITEM_TYPES.TAG,
     drop: (droppedTag) => {
-      droppedTag.isMainTag
-        ? setMainTags((prev) => {
-            return [...prev, droppedTag];
-          })
-        : setSubTags((prev) => {
-            return [...prev, droppedTag];
-          });
+      if (droppedTag.isMainTag) {
+        if (!mainTags.find((mainTag) => mainTag.id === droppedTag.id)) return;
+
+        setMainTags((prev) => {
+          return [...prev, droppedTag];
+        });
+      } else {
+        if (!subTags.find((subTag) => subTag.id === droppedTag.id)) return;
+
+        setSubTags((prev) => {
+          return [...prev, droppedTag];
+        });
+      }
 
       setGroups((prev) => {
         return droppedTag.isMainTag
