@@ -38,9 +38,20 @@ export function GroupCell({
         setGroups((prev) => {
           const droppedGroup = structuredClone(prev[groupNumber]);
 
-          isMain
-            ? (droppedGroup.main = droppedTag)
-            : (droppedGroup.sub[Number(cellNumber)] = droppedTag);
+          if (isMain) {
+            if (!!droppedGroup.main.name && setMainTags) {
+              setMainTags((prev) => [...prev, droppedGroup.main]);
+            }
+            droppedGroup.main = droppedTag;
+          } else {
+            if (!!droppedGroup.sub[Number(cellNumber)].name && setSubTags) {
+              setSubTags((prev) => [
+                ...prev,
+                droppedGroup.sub[Number(cellNumber)],
+              ]);
+            }
+            droppedGroup.sub[Number(cellNumber)] = droppedTag;
+          }
 
           const removedGroups = prev.filter(
             (_group, index) => groupNumber !== index,
