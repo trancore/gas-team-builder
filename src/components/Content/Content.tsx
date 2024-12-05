@@ -2,32 +2,26 @@
 import Tag from "~/components/Tag/Tag";
 import Group from "~/components/Group/Group";
 import AdditionalGroup from "~/components/Group/AdditionalGroup";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { DragObjectTag } from "~/types/dragAndDrop";
 import { Group as GroupType } from "~/types/group";
 import { useDrop } from "react-dnd/dist/hooks/useDrop/useDrop";
 import { ITEM_TYPES } from "~/constants/dragAndDrop";
 
-export default function Content() {
-  const [mainTags, setMainTags] = useState<DragObjectTag[]>([
-    { id: "1", name: "メインタグ１", isMainTag: true },
-    { id: "2", name: "メインタグ２", isMainTag: true },
-    { id: "3", name: "メインタグ３", isMainTag: true },
-    { id: "4", name: "メインタグ４", isMainTag: true },
-    { id: "5", name: "メインタグ５", isMainTag: true },
-  ]);
-  const [subTags, setSubTags] = useState<DragObjectTag[]>([
-    { id: "6", name: "サブタグ６", isMainTag: false },
-    { id: "7", name: "サブタグ７", isMainTag: false },
-    { id: "8", name: "サブタグ８", isMainTag: false },
-    { id: "9", name: "サブタグ９", isMainTag: false },
-    { id: "10", name: "サブタグ１０", isMainTag: false },
-  ]);
-  const [groups, setGroups] = useState<GroupType[]>([
-    { main: {}, sub: [{}] },
-    { main: {}, sub: [{}] },
-    { main: {}, sub: [{}] },
-  ]);
+type Props = {
+  mainTags: DragObjectTag[];
+  subTags: DragObjectTag[];
+  setMainTags: Dispatch<SetStateAction<DragObjectTag[]>>;
+  setSubTags: Dispatch<SetStateAction<DragObjectTag[]>>;
+};
+
+export default function Content({
+  mainTags,
+  subTags,
+  setMainTags,
+  setSubTags,
+}: Props) {
+  const [groups, setGroups] = useState<GroupType[]>([{ main: {}, sub: [{}] }]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, drop] = useDrop<DragObjectTag>(() => ({

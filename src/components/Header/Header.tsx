@@ -1,20 +1,15 @@
 ﻿import styles from "~/components/Header/Header.module.scss";
 import TextForm from "~/components/Form/TextForm";
 import Button from "~/components/Button/Button";
-import useForm from "~/hooks/useForm";
-import { DragObjectTag } from "~/types/dragAndDrop";
+import { Dispatch } from "react";
 
 type Props = {
-  getTags: (spreadSheetId: string) => Promise<DragObjectTag[] | undefined>;
+  inputText: string;
+  read: () => void;
+  setInputText: Dispatch<React.SetStateAction<string>>;
 };
 
-export default function Header({ getTags }: Props) {
-  const { inputText, setInputText } = useForm();
-
-  async function read() {
-    const tags = await getTags(inputText);
-    console.log("🚀 ~ read ~ tags:", tags);
-  }
+export default function Header({ inputText, read, setInputText }: Props) {
   function output() {}
 
   return (

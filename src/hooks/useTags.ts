@@ -6,8 +6,8 @@ import * as server from "../../server/code.ts";
 const { serverFunctions } = new GASClient<typeof server>();
 
 export default function useTags() {
-  const [mainTags, setMainTags] = useState<DragObjectTag[]>();
-  const [subTags, setSubTags] = useState<DragObjectTag[]>();
+  const [mainTags, setMainTags] = useState<DragObjectTag[]>([]);
+  const [subTags, setSubTags] = useState<DragObjectTag[]>([]);
 
   function parsValues(values: unknown[][]) {
     const header = values[0] as string[];
