@@ -11,7 +11,17 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "~": path.resolve(__dirname, "./src"),
+      "~/": path.join(__dirname, "./src/"),
+    },
+  },
+  css: {
+    modules: {
+      localsConvention: "dashes",
+    },
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+      },
     },
   },
 });

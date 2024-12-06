@@ -1,0 +1,22 @@
+﻿.group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  > table.group-top,
+  table.group-member {
+    width: 300px;
+
+    > tbody {
+      > tr {
+        text-align: center;
+
+        > td.add {
+          border: 1.5px dotted #0000ee;
+          border-width: 3px;
+          padding: 20px 0;
+        }
+      }
+    }
+  }
+}

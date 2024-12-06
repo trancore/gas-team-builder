@@ -1,0 +1,22 @@
+﻿.header {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px;
+
+  > .app-title-input {
+    display: flex;
+
+    > .app-title {
+      margin-right: 24px;
+      font-size: 32px;
+    }
+
+    > .input-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+}
