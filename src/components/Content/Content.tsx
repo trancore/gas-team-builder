@@ -54,7 +54,7 @@ export default function Content({
           : prev.map((group) => {
               const subTags = group.sub.filter(
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                (_tag, index) => droppedTag.id !== String(index),
+                (tag) => droppedTag.id !== tag.id,
               );
               return {
                 main: group.main,
@@ -73,7 +73,7 @@ export default function Content({
             return (
               <Tag
                 key={`main-tag${mainTag.id}`}
-                id={mainTag.id || ""}
+                id={mainTag.id || "0"}
                 text={mainTag.name || ""}
                 isMainTag
                 info={mainTag.info}
@@ -86,7 +86,7 @@ export default function Content({
             return (
               <Tag
                 key={`sub-tag${subTag.id}`}
-                id={subTag.id || ""}
+                id={subTag.id || "0"}
                 text={subTag.name || ""}
                 info={subTag.info}
               />

@@ -9,7 +9,7 @@ import Tag from "~/components/Tag/Tag";
 type Props = {
   text: string;
   groupNumber: number;
-  cellNumber?: string;
+  cellNumber: string;
   isMain?: boolean;
   info?: {
     header: string;
@@ -49,13 +49,13 @@ export function GroupCell({
             }
             droppedGroup.main = droppedTag;
           } else {
-            if (!!droppedGroup.sub[Number(cellNumber)].name && setSubTags) {
+            if (!!droppedGroup.sub[Number(cellNumber) - 1].name && setSubTags) {
               setSubTags((prev) => [
                 ...prev,
-                droppedGroup.sub[Number(cellNumber)],
+                droppedGroup.sub[Number(cellNumber) - 1],
               ]);
             }
-            droppedGroup.sub[Number(cellNumber)] = droppedTag;
+            droppedGroup.sub[Number(cellNumber) - 1] = droppedTag;
           }
 
           const removedGroups = prev.filter(
@@ -95,12 +95,7 @@ export function GroupCell({
     >
       <div className={styles.tagBox}>
         {text ? (
-          <Tag
-            id={cellNumber || "0"}
-            text={text}
-            isMainTag={isMain}
-            info={info}
-          />
+          <Tag id={cellNumber} text={text} isMainTag={isMain} info={info} />
         ) : (
           <div className={styles.tag} />
         )}

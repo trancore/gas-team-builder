@@ -31,7 +31,7 @@ export default function Tag({ id, text, isMainTag = false, info }: Props) {
         isDragging: !!monitor.isDragging(),
       }),
     }),
-    [id, text, isMainTag],
+    [id, text, isMainTag, info],
   );
 
   return (
