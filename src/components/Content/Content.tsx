@@ -30,16 +30,18 @@ export default function Content({
     accept: ITEM_TYPES.TAG,
     drop: (droppedTag) => {
       if (droppedTag.isMainTag) {
-        if (!mainTags.find((mainTag) => mainTag.id === droppedTag.id)) return;
-
         setMainTags((prev) => {
-          return [...prev, droppedTag];
+          if (!prev.find((tag) => tag.id === droppedTag.id)) {
+            return [...prev, droppedTag];
+          }
+          return prev;
         });
       } else {
-        if (!subTags.find((subTag) => subTag.id === droppedTag.id)) return;
-
         setSubTags((prev) => {
-          return [...prev, droppedTag];
+          if (!prev.find((tag) => tag.id === droppedTag.id)) {
+            return [...prev, droppedTag];
+          }
+          return prev;
         });
       }
 

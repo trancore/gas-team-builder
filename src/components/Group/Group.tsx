@@ -68,7 +68,7 @@ export default function Group({
                 <GroupCell
                   text={tag.name || ""}
                   groupNumber={componentId}
-                  cellNumber={tag.id || "1"}
+                  cellNumber={tag.id || String(index + 1)}
                   info={tag.info}
                   setMainTags={setMainTags}
                   setSubTags={setSubTags}
