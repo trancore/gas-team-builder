@@ -11,7 +11,7 @@ function getValues(spreadSheetId: string, sheetName: string) {
     return;
   }
 
-  return sheet.getDataRange().getValues();
+  return sheet.getDataRange().getDisplayValues();
 }
 
 export { getValues };
