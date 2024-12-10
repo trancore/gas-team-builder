@@ -29,8 +29,21 @@ export default function App() {
   }
 
   function outputGroups() {
-    alert(JSON.stringify(groups));
+    if (!navigator.clipboard) {
+      alert("sorry. we can't copy in clipboard.");
+      return;
+    }
+
+    navigator.clipboard.writeText(JSON.stringify(groups)).then(
+      () => {
+        alert("we success in copying at clipboard.");
+      },
+      () => {
+        alert("sorry. we can't copy in clipboard.");
+      },
+    );
   }
+
   return (
     <>
       <Header
